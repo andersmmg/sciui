@@ -1,0 +1,1020 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2');
+
+// Context Colors
+@main: #78c8ff;
+@main-bg: darken(@main, 70%);
+@main-bg-2: darken(@main-bg, 1%);
+@text: fadeout(@main, 20%);
+
+@default: #224561;
+@success: #00781f;
+@info: #0e55ad;
+@warning: #785e00;
+@error: #780000;
+
+// Other stuff
+@border-lighten: 10%;
+@border-fade: 60%;
+@button-color: fadeout(white, .8);
+
+body {
+  font-family: "Exo 2", Arial, sans-serif;
+  font-weight: normal;
+  transition: opacity .3s;
+  background-color: @main-bg;
+  
+  &.leaving {
+  	opacity: 0;
+  }
+  & > * {
+	  margin: .4%;
+	  vertical-align: top;
+  }
+  .grid {
+  	background-image:
+		linear-gradient(90deg, transparent 1rem, @main-bg-2 1rem),
+		linear-gradient(transparent 1rem, @main-bg-2 1rem);
+		background-size: 1.2rem 1.2rem;
+  }
+  & {
+  	background-color: @main-bg-2;
+  	background-image:
+		linear-gradient(90deg, @main-bg 1rem, transparent 1rem),
+		linear-gradient(@main-bg 1rem, transparent 1rem);
+		background-size: 1.2rem 1.2rem;
+  }
+}
+// Scrollbar
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background-color: fadeout(@main, 84%);
+}
+
+::-webkit-scrollbar-track{
+  border-radius: 0px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+  border-radius:0px;
+  background-color: fadeout(@main, 65%);
+  border:1px solid fadeout(@main, @border-fade);
+}
+
+textarea:focus, input:focus, button:focus, select:focus{
+  outline: none;
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
+}
+.row {
+	margin-right: 0;
+	margin-left: 0;
+}
+
+// Panels
+.panel {
+	--aug-border-all: .5px;
+	--aug-border-bg: lighten(fadeout(@main, 90%), @border-lighten);
+
+  box-sizing: border-box;
+  display: inline-block;
+  font-size: 14px;
+  letter-spacing: .06em;
+  background-color: fadeout(@main, 90%);
+  border: 1px solid lighten(fadeout(@main, 90%), @border-lighten);
+  color: @text;
+  padding: 0 .6em .6em;
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 4px;
+  opacity: 0;
+  &.success {
+  	color: @text;
+  	background-color: fadeout(@success, 80%);
+  	border: 1px solid lighten(fadeout(@success, 90%), @border-lighten);
+  }
+  &.warning {
+  	color: @text;
+  	background-color: fadeout(@warning, 80%);
+  	border: 1px solid lighten(fadeout(@warning, 90%), @border-lighten);
+  }
+  &.info {
+  	color: @text;
+  	background-color: fadeout(@info, 80%);
+  	border: 1px solid lighten(fadeout(@info, 90%), @border-lighten);
+  }
+  &.error {
+  	color: @text;
+  	background-color: fadeout(@error, 80%);
+  	border: 1px solid lighten(fadeout(@error, 90%), @border-lighten);
+  }
+	&: {
+		after {
+			box-sizing: border-box;
+			color: rgba(120, 200, 255, 0.2);
+			content: '#0002134678 TFFC:3 /////////////';
+			font-size: .8em;
+			height: 2em;
+		}
+	}
+	.header {
+		border-bottom: 1px solid rgba(120, 200, 255, 0.2);
+		box-sizing: border-box;
+	}
+	.title {
+		box-sizing: border-box;
+		font-size: 1.2em;
+		font-weight: 100;
+		margin: 0;
+		overflow: hidden;
+		padding: .4em 0;
+		text-overflow: ellipsis;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	.body {
+		box-sizing: border-box;
+		padding: .2em;
+	}
+	.divider {
+		border-top: 1px solid rgba(120, 200, 255, 0.2);
+		box-sizing: border-box;
+		height: .6em;
+		margin-top: .6em;
+	}
+}
+.shown {
+  animation: flickerIn 0.5s;
+  opacity: 1;
+}
+
+// Inputs
+.input {
+	font-weight: 100;
+	font-size: 16px;
+	letter-spacing: .06em;
+	color: fadeout(@main, 10%);
+	margin: 0;
+	padding: 0;
+	margin-top: 2px;
+  margin-bottom: 2px;
+	label {
+		font-weight: 100;
+		font-size: 1em;
+		margin: 0 0 4em 0;
+		line-height: 1.5em;
+	}
+	label.required {
+		&:after {
+			display: relative;
+			content: '*';
+			padding-left: .2em;
+			color: rgba(255, 120, 120, 0.8);
+			font-size: 1em;
+			font-weight: 100;
+		}
+	}
+	input[type="text"] {
+		font-size: 1em;
+		font-weight: 100;
+		background-color: darken(@default, 10%);
+		border: 1px solid fadeout(@default, @border-fade);
+		height: 2.4em;
+		box-sizing: border-box;
+		padding: 0 .8em;
+		letter-spacing: .06em;
+		width: 100%;
+		transition: background-color .2s;
+		&:focus {
+			background-color: @default;
+			border: 1px solid lighten(@default, 10%);
+			outline: none;
+		}
+		&::-webkit-input-placeholder {
+			color: fadeout(@main, 50%);
+			font-size: 1em;
+			font-weight: 100;
+		}
+		&:-moz-placeholder {
+			color: fadeout(@main, 50%);
+			font-size: 1em;
+			font-weight: 100;
+		}
+	}
+	input[type="password"] {
+		font-size: 1em;
+		font-weight: 100;
+		background-color: darken(@default, 10%);
+		border: 1px solid fadeout(@default, @border-fade);
+		height: 2.4em;
+		box-sizing: border-box;
+		padding: 0 .8em;
+		letter-spacing: .06em;
+		width: 100%;
+		transition: background-color .2s;
+		&:focus {
+			background-color: @default;
+			border: 1px solid lighten(@default, 10%);
+			outline: none;
+		}
+		&::-webkit-input-placeholder {
+			color: fadeout(@main, 50%);
+			font-size: 1em;
+			font-weight: 100;
+		}
+	}
+	input[type="text"][disabled], input[type="password"][disabled] {
+		background-color: darken(@default, 15%);
+		border: 1px solid darken(@default, 5%);
+		color: darken(@main, 10%);
+		cursor: not-allowed;
+		&::-webkit-input-placeholder {
+			color: fadeout(@main, 70%);
+		}
+		&:-moz-placeholder {
+			color: fadeout(@main, 70%);
+		}
+	}
+	select {
+		font-size: 1em;
+		font-weight: 100;
+		background-color: darken(@default, 10%);
+		border: 1px solid fadeout(@default, @border-fade);
+		height: 2.4em;
+		box-sizing: border-box;
+		padding: 0 .8em;
+		letter-spacing: .06em;
+		width: 100%;
+		-webkit-appearance: button;
+		appearance: button;
+		
+		option {
+			background-color: @default;
+		}
+	}
+	.help {
+		display: block;
+		font-size: .8em;
+		font-weight: 100;
+		padding: .6em 0;
+		color: fadeout(@main, 50%);
+	}
+	.error {
+		display: block;
+		font-size: .8em;
+		font-weight: 100;
+		text-transform: uppercase;
+		padding: .6em 0;
+		color: lighten(@error, 30%);
+	}
+}
+
+// Switches
+.toggle, .switch {
+  display: inline-flex;
+}
+.switch input, .toggle input {
+  opacity: 0;
+  position: absolute;
+  right: 100%;
+  width: 1px;
+  height: 1px;
+  margin-bottom: 100px;
+}
+.switch label, .toggle label {
+	user-select: none;
+}
+.switch label {
+	padding-left: 1.9em !important;
+  padding-right: .5em !important;
+}
+.switch label:empty {
+  padding-right: 1em;
+}
+
+.switch input:checked + label:empty {
+	padding-left: 1em;
+}
+.switch input:checked + label {
+  filter: brightness(160%);
+	padding-left: .5em !important;
+  padding-right: 1.9em !important;
+}
+
+.toggle input:checked + label {
+  filter: brightness(160%);
+}
+
+.switch input + label:after {
+  filter: brightness(160%);
+  content: '';
+  width: 1.5em;
+  height: 100%;
+  background-color: #224561;
+	border: 1px solid fadeout(@default, @border-fade);
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  right: ~"calc(100% - 1.5em)";
+  transition: right .2s linear;
+}
+.switch input:checked + label:after {
+  right: 0;
+}
+
+// Menu
+.menu {
+	&.horizontal {
+		cursor: default;
+		user-select: none;
+		a {
+			display: inline-block;
+			cursor: pointer;
+		}
+	}
+	a {
+		display: block;
+		padding: 5px;
+		font-size: 1.1em;
+    color: inherit;
+    text-decoration: none;
+		
+		&:hover {
+			background-color: fadeout(@main, 95%);
+		}
+		&.active {
+			background-color: fadeout(@main, 90%);
+		}
+	}
+}
+
+// Buttons
+.button {
+	&:active:enabled, a&:active {
+		&.active();
+	}
+	will-change: filter;
+	backface-visibility: hidden;
+	font-smoothing: subpixel-antialiased !important;
+	-webkit-font-smoothing: subpixel-antialiased !important;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: translateZ(0) scale(1.0, 1.0);
+	transform: translateZ(0);
+	transition-duration: 0.4s;
+	font-size: 14px;
+	font-weight: 300;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	color: @button-color;
+	margin: 2px 0px;
+	padding: .6em 1.2em;
+	border: 1px solid lighten(@default, 10%);
+	background-color: @default;
+	cursor: pointer;
+	transition-property: filter;
+	
+	&.active {
+		filter: brightness(140%);
+		transition-duration: 0s;
+	}
+	a& {
+		text-decoration: none;
+		display: inline-block;
+	}
+	a&:hover {
+		color: @button-color;
+	}
+	a&:focus {
+		color: @button-color;
+	}
+	&[disabled] {
+		opacity: 0.65;
+		cursor: not-allowed;
+	}
+	&.alert {
+		&.error();
+		animation: alert-flash .5s linear infinite;
+	}
+	&.error {
+		background-color: @error;
+		border: 1px solid lighten(@error, @border-lighten);
+		color: rgba(255, 255, 255, 0.8);
+	}
+	&.info {
+		background-color: @info;
+		border: 1px solid lighten(@info, @border-lighten);
+		color: rgba(255, 255, 255, 0.8);
+	}
+	&.warning {
+		background-color: @warning;
+		border: 1px solid lighten(@warning, @border-lighten);
+		color: rgba(255, 255, 255, 0.8);
+	}
+	&.success {
+		background-color: fadeout(@success, 20%);
+		border: 1px solid lighten(@success, @border-lighten);
+		color: rgba(255, 255, 255, 0.8);
+	}
+	&.sm {
+		font-size: 14px;
+		padding: 0.4em 1.0em;
+	}
+	&.md {
+		font-size: 16px;
+		padding: 0.7em 1.6em;
+	}
+	&.lg {
+		font-size: 20px;
+		padding: 0.6em 1.6em;
+	}
+}
+
+// Upload Button
+.uploader {
+	border: 1px solid lighten(@default, 10%);
+	background-color: fadeout(@default, 80%);
+	padding: 1px 10px 1px 4px;
+	display: inline-block;
+	
+	label {
+	  .button();
+	  display: inline-block;
+	  cursor: pointer;
+	}
+	
+	.file{
+	  margin-left: 0.3rem;
+	  cursor: default;
+	}
+}
+
+
+// Metrics
+.metric {
+	font-size: 14px;
+	font-weight: 300;
+	box-sizing: border-box;
+	display: inline-block;
+	text-transform: uppercase;
+	letter-spacing: .06em;
+	border: 1px solid rgba(120, 200, 255, 0.4);
+	color: lighten(@default, 30%);
+	height: 6em;
+	width: 6em;
+	margin: 2px 0px;
+	padding: .4em;
+	text-align: center;
+	border-radius: 50%;
+	.value {
+		font-size: 2em;
+		font-weight: 300;
+		margin-top: .15em;
+	}
+	.value.success {
+		color: lighten(@success, 30%);
+	}
+	.value.warning {
+		color: lighten(@warning, 30%);
+	}
+	.value.error {
+		color: lighten(@error, 30%);
+	}
+	.label {
+		font-size: .8em;
+	}
+	canvas {
+		display: block;
+		position: absolute;
+		margin-top: -5px;
+		margin-left: -5px;
+		z-index: -99;
+	}
+}
+
+
+// Keypad
+.keypad {
+	padding: 0 !important;
+	table {
+		border: none;
+		width: 100%;
+	}
+	td {
+		padding-right: 3px;
+	}
+	.button {
+		width: 100%;
+		height: 4em;
+		margin: 3px 3px 0 0;
+	}
+}
+
+
+// Typography
+.heading {
+  font-size: 12px;
+  font-weight: 100;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+}
+
+h6.heading {
+  font-size: 1em;
+}
+
+h5.heading {
+  font-size: 1.143em;
+}
+
+h4.heading {
+  font-size: 1.286em;
+}
+
+h3.heading {
+  font-size: 1.429em;
+}
+
+h2.heading {
+  font-size: 1.714em;
+}
+
+h1.heading {
+  font-size: 2em;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+a {
+  /*text-decoration: underline;*/
+  color: fadeout(@main, 15%);
+}
+
+.info {
+	color: lighten(@info, 12%);
+}
+.success {
+	color: lighten(@success, 8%);
+}
+.warning {
+	color: lighten(@warning, 8%);
+}
+.error, .alert {
+	color: lighten(@error, 25%);
+}
+
+
+.container {
+	padding-right: 2px;
+	padding-left: 2px;
+}
+
+
+/* Toasts */
+@media (max-width: 1080px) {
+  .toast-top-right {
+	  /*top: 12px;*/
+	  /*right: 54px;*/
+	}
+}
+
+.toast {
+	box-shadow: none !important;
+  border-radius: 0 !important;
+  
+  box-sizing: border-box;
+  display: block;
+  font-size: 14px;
+  font-weight: 100;
+  letter-spacing: .06em;
+  // background-color: rgba(120, 200, 255, 0.1);
+  border: 1px solid fadeout(@main, 10%);
+  color: fadeout(@main, 10%);
+  padding: 0 1em 1em;
+}
+.toast-success {
+	background-color: @success;
+	border: 1px solid lighten(@success, @border-lighten);
+}
+.toast-info {
+	background-color: @info;
+	border: 1px solid lighten(@info, @border-lighten);
+}
+.toast-warning {
+	background-color: @warning;
+	border: 1px solid lighten(@warning, @border-lighten);
+}
+.toast-error {
+	background-color: @error;
+	border: 1px solid lighten(@error, @border-lighten);
+}
+
+// Checkboxes
+.input.checkbox {
+	margin-top: 6px;
+}
+.checkbox {
+	[type="checkbox"] {
+		&:not(:checked) {
+			position: absolute;
+			left: -9999px;
+			+ {
+				label {
+					position: relative;
+					padding-left: 1.7em;
+					cursor: pointer;
+					line-height: 19px;
+					&:before {
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 1.25em;
+						height: 1.25em;
+						border: 1px solid lighten(fadeout(@main, 90%), @border-lighten);
+						background: none;
+						transition: background .3s;
+					}
+				}
+			}
+		}
+		&:checked {
+			position: absolute;
+			left: -9999px;
+			+ {
+				label {
+					position: relative;
+					padding-left: 1.7em;
+					cursor: pointer;
+					line-height: 19px;
+					&:before {
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 1.25em;
+						height: 1.25em;
+						border: 1px solid lighten(fadeout(@main, 90%), @border-lighten);
+						background: none;
+						transition: background .3s;
+					}
+					&:after {
+						content: '\00D7';
+						position: absolute;
+						left: 2px;
+						top: -3px;
+						font-size: 2em;
+						width: 1.25em;
+						height: 1.25em;
+						background: none;
+						animation: flickerIn 0.5s;
+					}
+				}
+			}
+		}
+		&:disabled {
+			&:not(:checked) {
+				+ {
+					label {
+						&:before {
+							box-shadow: none;
+							border-color: #bbb;
+							background-color: #ddd;
+						}
+					}
+				}
+			}
+			&:checked {
+				+ {
+					label {
+						&:before {
+							box-shadow: none;
+							border-color: #bbb;
+							background-color: #ddd;
+						}
+						&:after {
+							color: #999;
+						}
+					}
+				}
+			}
+			+ {
+				label {
+					color: #aaa;
+				}
+			}
+		}
+	}
+}
+
+// Radio Buttons
+.radio {
+	[type="radio"] {
+		&:not(:checked) {
+			position: absolute;
+			left: -9999px;
+			+ {
+				label {
+					position: relative;
+					padding-left: 1.7em;
+					cursor: pointer;
+					line-height: 19px;
+					&:before {
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 1.25em;
+						height: 1.25em;
+						border: 1px solid lighten(fadeout(@main, 90%), @border-lighten);
+						border-radius: 50%;
+						background: none;
+						transition: background .1s;
+					}
+				}
+			}
+		}
+		&:checked {
+			position: absolute;
+			left: -9999px;
+			+ {
+				label {
+					position: relative;
+					padding-left: 1.7em;
+					cursor: pointer;
+					line-height: 19px;
+					&:before {
+						content: '';
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 1.25em;
+						height: 1.25em;
+						border: 1px solid lighten(fadeout(@main, 90%), @border-lighten);
+						border-radius: 50%;
+						background: none;
+						transition: background .1s;
+						background: lighten(fadeout(@main, 50%), 10%);
+						animation: flickerIn 0.5s;
+					}
+				}
+			}
+		}
+		&:disabled {
+			&:not(:checked) {
+				+ {
+					label {
+						&:before {
+							box-shadow: none;
+							border-color: #bbb;
+							background-color: #ddd;
+						}
+					}
+				}
+			}
+			&:checked {
+				+ {
+					label {
+						&:before {
+							box-shadow: none;
+							border-color: #bbb;
+							background-color: #ddd;
+						}
+						&:after {
+							color: #999;
+						}
+					}
+				}
+			}
+			+ {
+				label {
+					color: #aaa;
+				}
+			}
+		}
+	}
+}
+
+
+// Icons
+
+// RemixIcons
+[class^="ri-"], [class*=" ri-"] {
+	line-height: 0;
+	position: relative;
+	top: 2px;
+}
+
+// Progress Bars
+progress {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	&:not([value]) {
+		-webkit-animation: animate-stripes 1s linear infinite;
+		animation: animate-stripes 1s linear infinite;
+		background: linear-gradient(45deg, fadeout(@main, 25%) 25%, #ffffff00 25%, #ffffff00 50%, fadeout(@main, 25%) 50%, fadeout(@main, 25%) 75%, #ffffff00 75%, #ffffff05 100%);
+		background-size: 56.57px 56.57px;
+		&::-webkit-progress-bar {
+			background: none;
+			border: 1px solid fadeout(@default, @border-fade);
+			border-radius: 0;
+		}
+	}
+}
+progress[value] {
+	&::-webkit-progress-bar {
+		background: none;
+		border: 1px solid fadeout(@default, @border-fade);
+		border-radius: 0;
+	}
+	&::-webkit-progress-value {
+		background: fadeout(@main, 25%);
+		transition: width 0.5s;
+	}
+}
+
+
+@-webkit-keyframes animate-stripes {
+  100% { background-position: -56.57px 0px; }
+}
+
+@keyframes animate-stripes {
+  100% { background-position: -56.57px 0px; }
+}
+
+// Tabs
+.tabs {
+	.tab-buttons {
+		overflow: hidden;
+		border-left: 1px solid fadeout(@main, @border-fade);
+		border-bottom: 1px solid fadeout(@main, @border-fade);
+		overflow-x: auto;
+		overflow-y: hidden;
+		width: 100%;
+		display: inline-flex;
+		button {
+			background: none;
+			border: none;
+			border-right: 1px solid fadeout(@main, @border-fade);
+			border-top: 1px solid fadeout(@main, @border-fade);
+			float: left;
+			cursor: pointer;
+			padding: 10px 15px;
+			transition: 0.3s;
+			text-transform: uppercase;
+			&:focus {
+				outline: none;
+				background: #78c8ff1a;
+			}
+			&:hover[disabled] {
+				background: none;
+			}
+			&:hover {
+				background: #78c8ff1a;
+			}
+		}
+		button[disabled] {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+		button.active {
+			background: #78c8ff33;
+			color: #ced0d7;
+		}
+	}
+	.tabcontent {
+		display: none;
+		padding: 6px 12px;
+		border: 1px solid fadeout(@main, @border-fade);
+		border-top: none;
+		overflow-y: auto;
+	}
+}
+
+
+// Popups
+.popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 999;
+	&:after {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: red;
+	}
+	.close {
+		position: fixed;
+		right: 8px;
+		top: 6px;
+	}
+}
+.cover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: fadeOut(@main-bg, 10%);
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	transition: opacity .4s;
+	pointer-events: none;
+	z-index: 998;
+}
+.cover.show {
+	opacity: 1;
+	pointer-events: auto;
+}
+
+// Close Button
+.close {
+	font-size: 29px;
+	cursor: pointer;
+	&:hover {
+		color: #90d2ff;
+	}
+}
+
+
+// Loaders
+.loader {
+  animation: spin 1s infinite linear;
+  border: 3px solid fadeout(@main, 90%);
+  border-radius: 50%;
+  border-top-color: fadeout(@main, 25%);
+  height: 2em;
+  width: 2em;
+}
+span.loader {
+  display: inline-block;
+}
+
+// Utilities
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
+pre {
+	border: 1px solid lighten(@default, 10%);
+	display: block;
+	padding: 3px;
+	background-color: fadeout(@main, 95%);
+	tab-size: 2em;
+}
+.hljs {
+	background: none;
+	padding: 0;
+}
+
+.hljs-addition, .hljs-attribute, .hljs-bullet, .hljs-name, .hljs-string, .hljs-symbol, .hljs-template-tag, .hljs-template-variable, .hljs-title, .hljs-type, .hljs-variable {
+	color: #5d9dca;
+}
+
+// Animations
+@keyframes flickerIn {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: .7;
+  }
+  60% {
+    opacity: .4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes alert-flash {
+	50% {
+		border: 1px solid #ff9c9c;
+		background-color: rgba(215, 0, 0, 0.9);
+	}
+}
