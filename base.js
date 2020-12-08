@@ -90,11 +90,15 @@ $(function() {
 	$(typeSelector).each(startType);
 	
 	try {
-		$('.circle[data-value]').circleProgress({
-			size: 82,
-			thickness: 3,
-			fill: "#78c8ffcc"
+		$('.circle[data-value]').each(function(i, e) {
+			var color = $(this).find(".value").css("color");
+			$(this).circleProgress({
+				size: 82,
+				thickness: 3,
+				fill: color
+			});
 		});
+		
 	} catch (e) {
 		hasCircleProgress = false;
 	}
