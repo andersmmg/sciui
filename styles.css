@@ -524,6 +524,21 @@ a.uploader label:focus {
   margin-left: -5px;
   z-index: -99;
 }
+.buttongrid {
+  padding: 0 !important;
+}
+.buttongrid table {
+  border: none;
+  width: 100%;
+}
+.buttongrid td {
+  padding-right: 3px;
+}
+.buttongrid .button {
+  width: 100%;
+  height: 4em;
+  margin: 3px 3px 0 0;
+}
 .keypad {
   padding: 0 !important;
 }
