@@ -90,7 +90,7 @@ $(function() {
 	$(typeSelector).each(startType);
 	
 	try {
-		$('.circle[data-value]').each(function(i, e) {
+		$('.metric[data-value]').each(function(i, e) {
 			var color = $(this).find(".value").css("color");
 			$(this).circleProgress({
 				size: 82,
