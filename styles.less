@@ -578,6 +578,9 @@ a {
 .error, .alert {
 	color: lighten(@error, 25%);
 }
+.alert {
+    animation: alert-flash-text .5s linear infinite;
+}
 
 
 .container {
@@ -819,6 +822,10 @@ a {
 	line-height: 0;
 	position: relative;
     top: 0.15em;
+
+    &.no-shift {
+        top: 0;
+    }
 }
 
 // Progress Bars
@@ -1031,7 +1038,12 @@ pre {
 }
 @keyframes alert-flash {
 	50% {
-		border: 1px solid #ff9c9c;
-		background-color: rgba(215, 0, 0, 0.9);
+		border: 1px solid lighten(@error, 40%);
+		background-color: lighten(@error, 10%);
+	}
+}
+@keyframes alert-flash-text {
+	50% {
+		color: lighten(@error, 45%);
 	}
 }

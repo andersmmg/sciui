@@ -596,6 +596,9 @@ a {
 .alert {
   color: #f80000;
 }
+.alert {
+  animation: alert-flash-text .5s linear infinite;
+}
 .container {
   padding-right: 2px;
   padding-left: 2px;
@@ -767,6 +770,10 @@ a {
   line-height: 0;
   position: relative;
   top: 0.15em;
+}
+[class^="ri-"].no-shift,
+[class*=" ri-"].no-shift {
+  top: 0;
 }
 progress {
   -webkit-appearance: none;
@@ -969,7 +976,12 @@ pre {
 }
 @keyframes alert-flash {
   50% {
-    border: 1px solid #ff9c9c;
-    background-color: rgba(215,0,0,0.9);
+    border: 1px solid #ff4545;
+    background-color: #ab0000;
+  }
+}
+@keyframes alert-flash-text {
+  50% {
+    color: #ff5f5f;
   }
 }
