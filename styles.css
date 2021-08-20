@@ -766,7 +766,7 @@ a {
 [class*=" ri-"] {
   line-height: 0;
   position: relative;
-  top: 2px;
+  top: 0.15em;
 }
 progress {
   -webkit-appearance: none;
