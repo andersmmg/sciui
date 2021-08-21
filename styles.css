@@ -142,6 +142,33 @@ select:focus {
   font-size: 1em;
   font-weight: 100;
 }
+.input textarea {
+  font-size: 1em;
+  font-weight: 100;
+  background-color: #152a3b;
+  border: 1px solid rgba(34,69,97,0.4);
+  box-sizing: border-box;
+  padding: .3em .8em;
+  letter-spacing: .06em;
+  width: 100%;
+  max-width: 100%;
+  transition: background-color .2s;
+}
+.input textarea:focus {
+  background-color: #224561;
+  border: 1px solid #2f6087;
+  outline: none;
+}
+.input textarea::-webkit-input-placeholder {
+  color: rgba(120,200,255,0.5);
+  font-size: 1em;
+  font-weight: 100;
+}
+.input textarea:-moz-placeholder {
+  color: rgba(120,200,255,0.5);
+  font-size: 1em;
+  font-weight: 100;
+}
 .input input[type="text"] {
   font-size: 1em;
   font-weight: 100;
@@ -581,6 +608,7 @@ h1.heading {
   border-bottom: 1px solid rgba(0,255,255,0.2);
 }
 a {
+  text-decoration: underline;
   color: rgba(120,200,255,0.85);
 }
 .info {
@@ -938,6 +966,9 @@ pre {
 .hljs-type,
 .hljs-variable {
   color: #5d9dca;
+}
+.center {
+  text-align: center;
 }
 @keyframes flickerIn {
   0% {
