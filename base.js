@@ -1,6 +1,16 @@
+jQuery.fn.extend({
+    silenced: function () {
+        if ($(this).hasClass('silent'))
+            return true
+        if ($(this).parents().hasClass('silent'))
+            return true
+        return false
+    }
+});
+
 $(function () {
     try {
-        toastr.options.timeOut = 60000;
+        toastr.options.timeOut = 10000; // 10 seconds
         toastr.options.closeDuration = 300;
         toastr.options.positionClass = "toast-bottom-left";
     } catch (e) {
@@ -13,7 +23,7 @@ $(function () {
         var target = $(this).closest(".keypad").data("target");
         var limit = $(target).attr("maxlength");
 
-        if (options.audio && options.play_keypad)
+        if (options.audio && options.play_keypad && !$(this).silenced())
             sfx_keypad_tap.play();
 
         if ($(this).text() == "C" && !$(this).hasClass("letter")) {
@@ -32,7 +42,7 @@ $(function () {
     });
 
     $(".input input, .input textarea").on("input", function (event) {
-        if (options.audio && options.play_form_type)
+        if (options.audio && options.play_form_type && !$(this).silenced())
             sfx_form_type.play();
     });
 
@@ -78,8 +88,8 @@ $(function () {
         open_popup($(this).data("target"));
     });
 
-    $("button, input[type=checkbox], input[type=radio]").click(function () {
-        if (options.audio && options.play_button)
+    $(".button, input[type=checkbox], input[type=radio]").click(function () {
+        if (options.audio && options.play_button && !$(this).silenced())
             sfx_button_tap.play();
     });
 
@@ -105,7 +115,6 @@ $(function () {
                 fill: color
             });
         });
-
     } catch (e) {
         hasCircleProgress = false;
     }
@@ -143,9 +152,12 @@ try {
     toastr.subscribe((...args) => {
         if (args[0].state == "visible") {
             if (options.audio && options.play_toast)
-                switch(args[0].map.type) {
+                switch (args[0].map.type) {
                     case "error":
                         sfx_toast_error.play()
+                        break;
+                    case "warning":
+                        sfx_toast_warn.play()
                         break;
                     default:
                         sfx_toast_show.play()
@@ -172,10 +184,13 @@ try {
         src: ['audio/ui_chirp.wav']
     });
     sfx_toast_show = new Howl({
-        src: ['audio/ui_chime.wav']
+        src: ['audio/ui_notice.wav']
     });
     sfx_toast_error = new Howl({
         src: ['audio/ui_error.wav']
+    });
+    sfx_toast_warn = new Howl({
+        src: ['audio/ui_warn.wav']
     });
 } catch (e) {
     hasHowl = false;
@@ -245,7 +260,7 @@ function open_popup(target) {
     $(target).show();
     $(target).find(typeSelector).each(startType);
     $(".cover").addClass("show");
-    if (options.audio && options.play_popup) {
+    if (options.audio && options.play_popup && !$(target).silenced()) {
         sfx_popup_show.play();
     }
 }
