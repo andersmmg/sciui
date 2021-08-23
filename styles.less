@@ -1019,11 +1019,9 @@ span.loader {
 
 // Tables
 .table {
-	display: block;
 	padding: 3px;
 	background-color: fadeout(@main, 95%);
 	tab-size: 2em;
-	display: block;
 
     border-collapse: collapse;
 	background-color: fadeout(@main, 95%);
@@ -1040,6 +1038,11 @@ span.loader {
 
     &.stripes tr:nth-child(even) {
         background-color: fadeout(@main, 90%);
+    }
+
+    &.full-width {
+        width: 100%;
+        table-layout: fixed;
     }
 }
 

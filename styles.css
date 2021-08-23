@@ -957,7 +957,6 @@ span.loader {
   display: inline-block;
 }
 .table {
-  display: block;
   padding: 3px;
   background-color: rgba(120,200,255,0.05);
   tab-size: 2em;
@@ -974,6 +973,10 @@ span.loader {
 }
 .table.stripes tr:nth-child(even) {
   background-color: rgba(120,200,255,0.1);
+}
+.table.full-width {
+  width: 100%;
+  table-layout: fixed;
 }
 .float-right {
   float: right;
