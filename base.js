@@ -112,7 +112,8 @@ $(function () {
             $(this).circleProgress({
                 size: 82,
                 thickness: 3,
-                fill: color
+                fill: color,
+                animation: { duration: 500, easing: "circleProgressEasing" }
             });
         });
     } catch (e) {
