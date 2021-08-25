@@ -978,6 +978,10 @@ span.loader {
   width: 100%;
   table-layout: fixed;
 }
+.table-container {
+  width: 100% !important;
+  overflow-x: auto;
+}
 .float-right {
   float: right;
 }

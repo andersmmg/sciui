@@ -88,7 +88,7 @@ $(function () {
         open_popup($(this).data("target"));
     });
 
-    $(".button, input[type=checkbox], input[type=radio]").click(function () {
+    $(".button, input[type=checkbox], input[type=radio], .tab-buttons button").click(function () {
         if (options.audio && options.play_button && !$(this).silenced())
             sfx_button_tap.play();
     });
