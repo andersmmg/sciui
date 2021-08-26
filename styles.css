@@ -92,6 +92,7 @@ select:focus {
 .panel .header {
   border-bottom: 1px solid rgba(120,200,255,0.2);
   box-sizing: border-box;
+  cursor: default;
 }
 .panel .title {
   box-sizing: border-box;
@@ -908,6 +909,12 @@ progress[value]::-webkit-progress-value {
   transform: translate(-50%,-50%);
   z-index: 999;
 }
+.popup.alarm .panel {
+  animation: alert-flash .5s linear infinite;
+  background-color: rgba(120,0,0,0.5);
+  border: 1px solid #ab0000;
+  color: rgba(255,255,255,0.8);
+}
 .popup:after {
   position: fixed;
   left: 0;
@@ -917,9 +924,9 @@ progress[value]::-webkit-progress-value {
   background-color: red;
 }
 .popup .close {
+  color: rgba(120,200,255,0.8);
   position: fixed;
   right: 8px;
-  top: 6px;
 }
 .cover {
   position: fixed;

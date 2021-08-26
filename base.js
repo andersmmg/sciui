@@ -29,14 +29,20 @@ $(function () {
         if ($(this).text() == "C" && !$(this).hasClass("letter")) {
             $(target).val("");
         } else {
-            if ($(target).val().length >= 23) {
-                $(target).fadeTo(50, 0.3, function () {
-                    $(this).fadeTo(400, 1.0);
-                });
-            } else {
-                $(target).val($(target).val() + $(this).text());
+            if ($(this).data("event")) {
+                $(this).closest(".keypad").trigger($(this).data("event"), $(target).val());
             }
-
+            if (isAlphaNumeric($(this).text())) {
+                if ($(target).val().length >= 23) {
+                    $(target).fadeTo(50, 0.3, function () {
+                        $(this).fadeTo(400, 1.0);
+                    });
+                    if (options.audio && options.play_keypad && !$(this).silenced())
+                        sfx_toast_warn.play();
+                } else {
+                    $(target).val($(target).val() + $(this).text());
+                }
+            }
         }
         e.stopImmediatePropagation();
     });
@@ -60,13 +66,16 @@ $(function () {
     });
 
     $(".keypad input").keyup(function (event) {
+        var target = $(this).closest(".keypad");
+        var button = target.find('button:contains("' + event.key + '")');
+
         if (event.keyCode == 8) {
             $(this).val("");
             return;
+        } else if (event.keyCode == 13) {
+            $(this).closest(".keypad").trigger("keypad:entered", $(this).val());
         }
 
-        var target = $(this).closest(".keypad");
-        var button = target.find('button:contains("' + event.key + '")');
         if (button.length) {
             $(this).val($(this).val() + event.key);
             button.removeClass("active");
@@ -113,7 +122,10 @@ $(function () {
                 size: 82,
                 thickness: 3,
                 fill: color,
-                animation: { duration: 500, easing: "circleProgressEasing" }
+                animation: {
+                    duration: 500,
+                    easing: "circleProgressEasing"
+                }
             });
         });
     } catch (e) {
@@ -131,6 +143,13 @@ $(function () {
     if (!$(".cover").length)
         $("body").append('<div class="cover"></div>');
 
+    setInterval(function () {
+        var cnt = $(".alarm:visible");
+        if (cnt.length > 0 && options.audio && options.play_popup_alarm && !$(cnt).silenced()) {
+            sfx_alarm_pings.play();
+        }
+    }, 1000);
+
 });
 
 var options = {
@@ -140,6 +159,7 @@ var options = {
     play_button: true,
     play_toast: true,
     play_form_type: true,
+    play_popup_alarm: true,
 };
 
 var typeDelay = 50;
@@ -192,6 +212,9 @@ try {
     });
     sfx_toast_warn = new Howl({
         src: ['audio/ui_warn.wav']
+    });
+    sfx_alarm_pings = new Howl({
+        src: ['audio/ui_alarm_pings.wav']
     });
 } catch (e) {
     hasHowl = false;
@@ -270,3 +293,17 @@ function close_popups() {
     $(".popup").hide();
     $(".cover").removeClass("show");
 }
+
+function isAlphaNumeric(str) {
+    var code, i, len;
+
+    for (i = 0, len = str.length; i < len; i++) {
+        code = str.charCodeAt(i);
+        if (!(code > 47 && code < 58) && // numeric (0-9)
+            !(code > 64 && code < 91) && // upper alpha (A-Z)
+            !(code > 96 && code < 123)) { // lower alpha (a-z)
+            return false;
+        }
+    }
+    return true;
+};

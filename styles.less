@@ -122,6 +122,7 @@ textarea:focus, input:focus, button:focus, select:focus{
 	.header {
 		border-bottom: 1px solid rgba(120, 200, 255, 0.2);
 		box-sizing: border-box;
+        cursor: default;
 	}
 	.title {
 		box-sizing: border-box;
@@ -962,6 +963,12 @@ progress[value] {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 999;
+	&.alarm .panel {
+		animation: alert-flash .5s linear infinite;
+		background-color: fadeout(@error, 50%);
+		border: 1px solid lighten(@error, @border-lighten);
+		color: rgba(255, 255, 255, 0.8);
+	}
 	&:after {
 		position: fixed;
 		left: 0;
@@ -971,9 +978,10 @@ progress[value] {
 		background-color: red;
 	}
 	.close {
+        color: @text;
 		position: fixed;
 		right: 8px;
-		top: 6px;
+		// top: 6px;
 	}
 }
 .cover {
