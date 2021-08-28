@@ -502,33 +502,40 @@ textarea:focus, input:focus, button:focus, select:focus{
 	height: 6em;
 	width: 6em;
 	margin: 2px 0px;
-	padding: .4em;
+	// padding: .4em;
 	text-align: center;
 	border-radius: 50%;
 	.value {
 		font-size: 2em;
 		font-weight: 300;
 		margin-top: .15em;
-	}
-	.value.success {
-		color: lighten(@success, 30%);
-	}
-	.value.warning {
-		color: lighten(@warning, 30%);
-	}
-	.value.error {
-		color: lighten(@error, 30%);
+        &.success {
+            color: lighten(@success, 30%);
+        }
+        &.warning {
+            color: lighten(@warning, 30%);
+        }
+        &.error {
+            color: lighten(@error, 30%);
+        }
 	}
 	.label {
 		font-size: .8em;
+        color: lighten(@default, 30%);
 	}
-	canvas {
-		display: block;
-		position: absolute;
-		margin-top: -5px;
-		margin-left: -5px;
-		z-index: -99;
-	}
+    .text {
+        position: relative;
+        top: .4em;
+    }
+    svg {
+        position: relative;
+        top: -60px; // Not really sure why this is the right amount
+        path {
+            stroke: @text;
+            stroke-dashoffset: 0;
+            transition: stroke-dashoffset .5s ease-in-out;
+        }
+    }
 }
 
 // Button Grid

@@ -542,7 +542,6 @@ a.uploader label:focus {
   height: 6em;
   width: 6em;
   margin: 2px 0px;
-  padding: .4em;
   text-align: center;
   border-radius: 50%;
 }
@@ -562,13 +561,20 @@ a.uploader label:focus {
 }
 .metric .label {
   font-size: .8em;
+  color: #5894c4;
 }
-.metric canvas {
-  display: block;
-  position: absolute;
-  margin-top: -5px;
-  margin-left: -5px;
-  z-index: -99;
+.metric .text {
+  position: relative;
+  top: .4em;
+}
+.metric svg {
+  position: relative;
+  top: -60px;
+}
+.metric svg path {
+  stroke: rgba(120,200,255,0.8);
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset .5s ease-in-out;
 }
 .buttongrid {
   padding: 0 !important;

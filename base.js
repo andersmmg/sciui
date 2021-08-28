@@ -117,15 +117,12 @@ $(function () {
 
     try {
         $('.metric[data-value]').each(function (i, e) {
-            var color = $(this).find(".value").css("color");
-            $(this).circleProgress({
-                size: 82,
-                thickness: 3,
-                fill: color,
-                animation: {
-                    duration: 500,
-                    easing: "circleProgressEasing"
-                }
+            this.bar = new ProgressBar.Circle(this, {
+                strokeWidth: 3,
+            });
+            this.bar.set($(this).data('value'))
+            this.addEventListener('changeData', function(e) {
+                circleProgress.set($(this).data('value'));
             });
         });
     } catch (e) {
@@ -192,7 +189,7 @@ try {
 
 try {
     sfx_button_tap = new Howl({
-        src: ['audio/ui_select.wav'],
+        src: ['audio/ui_button.wav'],
         volume: 0.5
     });
     sfx_keypad_tap = new Howl({
